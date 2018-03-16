@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="steel.marnix.eindwerkandroidstreats">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".activities.StartScreenActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,8 +23,14 @@
             </intent-filter>
         </activity>
 
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCnSH76-RMXwSx8hnzSEFFrGqkrj4BeUjY"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCnSH76-RMXwSx8hnzSEFFrGqkrj4BeUjY" />
+
+        <activity android:name=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/app_name">
+        </activity>
     </application>
 
 </manifest>
