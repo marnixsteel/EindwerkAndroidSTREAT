@@ -15,7 +15,7 @@ import steel.marnix.eindwerkandroidstreats.R;
 
 public class StartScreenActivity extends AppCompatActivity {
 
-        private static final long DELAY = 3000;
+        private static final long DELAY = 4000;
         private boolean scheduled = false;
         private Timer startTimer;
 
