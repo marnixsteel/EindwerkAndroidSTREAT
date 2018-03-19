@@ -18,11 +18,15 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import steel.marnix.eindwerkandroidstreats.R;
+import steel.marnix.eindwerkandroidstreats.TempdataSource.MockupDAO;
 import steel.marnix.eindwerkandroidstreats.fragments.DetailFragment;
+import steel.marnix.eindwerkandroidstreats.model.StreetArt;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener , OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
@@ -126,8 +130,20 @@ public class MainActivity extends AppCompatActivity
 
         mMap.setOnMarkerClickListener(this);
         updatecamera();
-        //test
+        drawmarkers();
+    }
 
+    private void drawmarkers() {
+        StreetArt[] streetArts = MockupDAO.getInstance().getArtData();
+
+        for (StreetArt art : streetArts){
+            mMap.addMarker(new MarkerOptions()
+                    .position(art.getArtCoord())
+                    .title(art.getName())
+                    .snippet(art.getDescription())
+                    .icon(BitmapDescriptorFactory.defaultMarker(200))
+            );
+        }
     }
 
     private void updatecamera() {
