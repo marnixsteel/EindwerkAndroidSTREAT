@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity
 
         mMap.setOnMarkerClickListener(this);
         updatecamera();
+        //test
 
     }
 
