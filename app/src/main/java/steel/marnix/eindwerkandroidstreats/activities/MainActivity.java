@@ -20,9 +20,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
 import steel.marnix.eindwerkandroidstreats.R;
-import steel.marnix.eindwerkandroidstreats.TempdataSource.MockupDAO;
 import steel.marnix.eindwerkandroidstreats.model.StreetArt;
+import steel.marnix.eindwerkandroidstreats.model.StreetArtDatabase;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener , OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
@@ -130,11 +132,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void drawArtMarkers() {
-        StreetArt[] streetArts = MockupDAO.getInstance().getArtData();
+        List<StreetArt> streetArts = StreetArtDatabase.getInstance(this).getDAO().getAllStreetArt();
 
         for (StreetArt art : streetArts){
             mMap.addMarker(new MarkerOptions()
-                    .position(art.getArtCoord())
+                    .position(new LatLng(art.getLatitude(), art.getLongitude()))
                     .title(art.getName())
                     .snippet(art.getDescription())
                     .icon(BitmapDescriptorFactory.defaultMarker(200))
