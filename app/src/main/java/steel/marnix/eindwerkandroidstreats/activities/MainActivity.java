@@ -1,9 +1,6 @@
 package steel.marnix.eindwerkandroidstreats.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,7 +22,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import steel.marnix.eindwerkandroidstreats.R;
 import steel.marnix.eindwerkandroidstreats.TempdataSource.MockupDAO;
-import steel.marnix.eindwerkandroidstreats.fragments.DetailFragment;
 import steel.marnix.eindwerkandroidstreats.model.StreetArt;
 
 public class MainActivity extends AppCompatActivity
@@ -129,10 +125,11 @@ public class MainActivity extends AppCompatActivity
 
         mMap.setOnMarkerClickListener(this);
         updatecamera();
-        drawmarkers();
+        drawArtMarkers();
+        drawFoodMarkers();
     }
 
-    private void drawmarkers() {
+    private void drawArtMarkers() {
         StreetArt[] streetArts = MockupDAO.getInstance().getArtData();
 
         for (StreetArt art : streetArts){
@@ -144,6 +141,10 @@ public class MainActivity extends AppCompatActivity
             );
         }
     }
+
+    private void drawFoodMarkers() {
+    }
+
 
     private void updatecamera() {
         LatLng bxlCoord = new LatLng(50.8503369, 4.3517103);
