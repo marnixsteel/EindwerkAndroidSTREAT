@@ -5,14 +5,23 @@
     tools:showIn="navigation_view">
 
     <item
-        android:id="@+id/nav_showMe"
-        android:icon="@drawable/ic_places"
-        android:title="Show me" />
+        android:title="Show me">
+    <menu>
+        <item
+            android:id="@+id/switch_food"
+            android:title="Food"
+            app:actionLayout="@layout/switch_item" />
+        <item
+            android:id="@+id/switch_streetArt"
+            android:title="Street Art"
+            app:actionLayout="@layout/switch_item" />
+    </menu>
+    </item>
+
     <item
-        android:id="@+id/app_bar_switch"
-        android:title="show street art"
-        app:actionLayout="@layout/switch_item" />
-    <group android:checkableBehavior="single">
+        android:title="Display as">
+    <menu>
+
         <item
             android:id="@+id/nav_maps"
             android:icon="@drawable/ic_maps"
@@ -21,13 +30,14 @@
             android:id="@+id/nav_list"
             android:icon="@drawable/ic_list"
             android:title="List" />
-        <item
+
+    </menu>
+    </item>
+    <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about"
             android:title="About" />
-    </group>
 
 
-</menu>
 
 </menu>

@@ -91,25 +91,24 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            DetailFragment df = DetailFragment.newInstance();
-            getFragmentManager().beginTransaction().replace(R.id.main_container, df).addToBackStack("Back").commit();
+        if (id == R.id.switch_streetArt) {
+            //DetailFragment df = DetailFragment.newInstance();
+            //getFragmentManager().beginTransaction().replace(R.id.main_container, df).addToBackStack("Back").commit();
+        } else if (id == R.id.switch_food) {
+            //DetailFragment df = DetailFragment.newInstance();
+            //getFragmentManager().beginTransaction().replace(R.id.main_container, df).addToBackStack("Back").commit();
 
 
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_maps) {
             MapFragment mf = MapFragment.newInstance();
             mf.getMapAsync(this);
 
             getFragmentManager().beginTransaction().replace(R.id.main_container, mf).addToBackStack("Back").commit();
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_list) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_about) {
 
         }
 
