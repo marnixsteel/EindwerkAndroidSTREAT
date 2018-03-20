@@ -27,11 +27,11 @@ import steel.marnix.eindwerkandroidstreats.fragments.RecyclerFragment;
 import steel.marnix.eindwerkandroidstreats.model.StreetArt;
 import steel.marnix.eindwerkandroidstreats.model.StreetArtDatabase;
 
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,11 @@ public class MainActivity extends AppCompatActivity
         mf.getMapAsync(this);
 
         getFragmentManager().beginTransaction().replace(R.id.main_container, mf).commit();
+
+
+
     }
+
 
     @Override
     public void onBackPressed() {
@@ -102,7 +106,6 @@ public class MainActivity extends AppCompatActivity
             //getFragmentManager().beginTransaction().replace(R.id.main_container, df).addToBackStack("Back").commit();
 
 
-
         } else if (id == R.id.nav_maps) {
             MapFragment mf = MapFragment.newInstance();
             mf.getMapAsync(this);
@@ -137,10 +140,10 @@ public class MainActivity extends AppCompatActivity
     private void drawArtMarkers() {
         List<StreetArt> streetArts = StreetArtDatabase.getInstance(this).getDAO().getAllStreetArt();
 
-        for (StreetArt art : streetArts){
+        for (StreetArt art : streetArts) {
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(art.getLatitude(), art.getLongitude()))
-                    .title(art.getName())
+                    .title(art.getArtistName())
                     .snippet(art.getDescription())
                     .icon(BitmapDescriptorFactory.defaultMarker(200))
             );
@@ -149,7 +152,6 @@ public class MainActivity extends AppCompatActivity
 
     private void drawFoodMarkers() {
     }
-
 
     private void updatecamera() {
         LatLng bxlCoord = new LatLng(50.8503369, 4.3517103);

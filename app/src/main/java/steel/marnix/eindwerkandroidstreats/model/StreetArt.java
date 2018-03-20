@@ -5,8 +5,6 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import com.google.android.gms.maps.model.LatLng;
-
 /**
  * Created by mazze on 19/03/2018.
  */
@@ -16,16 +14,15 @@ public class StreetArt {
 
     @PrimaryKey @NonNull
     private String id;
-    private String name, artistName, description, category;
+    private String artistName, description, category;
     private double latitude, longitude;
 
     public StreetArt(){
     }
 
     @Ignore
-    public StreetArt(@NonNull String id, String name, String artistName, String description, String category, double latitude, double longitude) {
+    public StreetArt(@NonNull String id, String artistName, String description, String category, double latitude, double longitude) {
         this.id = id;
-        this.name = name;
         this.artistName = artistName;
         this.description = description;
         this.category = category;
@@ -40,14 +37,6 @@ public class StreetArt {
 
     public void setId(@NonNull String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getArtistName() {
