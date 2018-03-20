@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 
 import steel.marnix.eindwerkandroidstreats.R;
+import steel.marnix.eindwerkandroidstreats.fragments.RecyclerFragment;
 import steel.marnix.eindwerkandroidstreats.model.StreetArt;
 import steel.marnix.eindwerkandroidstreats.model.StreetArtDatabase;
 
@@ -109,6 +110,8 @@ public class MainActivity extends AppCompatActivity
             getFragmentManager().beginTransaction().replace(R.id.main_container, mf).addToBackStack("Back").commit();
 
         } else if (id == R.id.nav_list) {
+            RecyclerFragment rf = RecyclerFragment.newInstance();
+            getFragmentManager().beginTransaction().replace(R.id.main_container, rf).addToBackStack("Back").commit();
 
         } else if (id == R.id.nav_about) {
 
