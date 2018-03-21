@@ -5,13 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.preference.PreferenceManager;
-import android.util.Log;
-
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +33,7 @@ public abstract class StreetArtDatabase extends RoomDatabase {
             instance = Room.databaseBuilder(context, StreetArtDatabase.class, "streetart.db").allowMainThreadQueries().build();
 
             sp = PreferenceManager.getDefaultSharedPreferences(context);
-            if (sp.getBoolean("first_time", true))
+            if (sp.getBoolean("streetart_not_loaded", true))
                 createData();
         }
         return instance;
@@ -54,7 +48,7 @@ public abstract class StreetArtDatabase extends RoomDatabase {
                     OkHttpClient client = new OkHttpClient();
 
                     Request request = new Request.Builder()
-                            .url("https://opendata.brussel.be/api/records/1.0/search/?dataset=street-art0")
+                            .url("https://opendata.brussel.be/api/records/1.0/search/?dataset=street-art0&rows=23")
                             .get()
                             .build();
 
@@ -92,16 +86,12 @@ public abstract class StreetArtDatabase extends RoomDatabase {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                sp.edit().putBoolean("first_time", false).commit();
+                sp.edit().putBoolean("streetart_not_loaded", false).commit();
             }
         });
         backGroundThread.start();
-
-
     }
-
     public abstract StreetArtDAO getDAO();
-
 }
 
 

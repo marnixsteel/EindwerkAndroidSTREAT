@@ -26,6 +26,8 @@ import steel.marnix.eindwerkandroidstreats.R;
 import steel.marnix.eindwerkandroidstreats.fragments.AboutFragment;
 import steel.marnix.eindwerkandroidstreats.fragments.DetailFragment;
 import steel.marnix.eindwerkandroidstreats.fragments.RecyclerFragment;
+import steel.marnix.eindwerkandroidstreats.model.FoodTruck;
+import steel.marnix.eindwerkandroidstreats.model.FoodTruckDatabase;
 import steel.marnix.eindwerkandroidstreats.model.StreetArt;
 import steel.marnix.eindwerkandroidstreats.model.StreetArtDatabase;
 
@@ -58,7 +60,6 @@ public class MainActivity extends AppCompatActivity
         getFragmentManager().beginTransaction().replace(R.id.main_container, mf).commit();
 
     }
-
 
     @Override
     public void onBackPressed() {
@@ -152,6 +153,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void drawFoodMarkers() {
+
+        List<FoodTruck> foodTrucks = FoodTruckDatabase.getInstance(this).getDAO().getAllFoodTrucks();
+
+        for (FoodTruck truck : foodTrucks) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(truck.getLatitude(), truck.getLongitude()))
+                    .title(truck.getName())
+                    .snippet(truck.getLocation())
+                    .icon(BitmapDescriptorFactory.defaultMarker(320))
+            );
+        }
     }
 
     private void updatecamera() {
