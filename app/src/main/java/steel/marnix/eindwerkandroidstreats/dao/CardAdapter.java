@@ -48,7 +48,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvArtistName.setText(mDataset[position]);
-        Picasso.get().load(R.mipmap.streat_icons_round).into(holder.ivArt);
+        Picasso.get()
+                .load(R.mipmap.streat_icons_round)
+                .resize(200, 200)
+                .into(holder.ivArt);
     }
 
 
