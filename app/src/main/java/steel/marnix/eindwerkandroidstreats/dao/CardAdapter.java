@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import steel.marnix.eindwerkandroidstreats.R;
 
 /**
@@ -23,9 +25,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
             public ViewHolder(View v) {
                 super(v);
-                tvArtistName = v.findViewById(R.id.tv_cv_artist_name);;
+                tvArtistName = v.findViewById(R.id.tv_cv_artist_name);
+                ivArt = v.findViewById(R.id.iv_listcontent_foto);
             }
         }
+
 
     public CardAdapter(String[] myDataset) {
         mDataset = myDataset;
@@ -44,6 +48,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvArtistName.setText(mDataset[position]);
+        Picasso.get().load(R.mipmap.streat_icons_round).into(holder.ivArt);
     }
 
 
