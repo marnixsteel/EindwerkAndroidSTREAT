@@ -38,7 +38,7 @@ public abstract class StreatDatabase extends RoomDatabase {
             sp = PreferenceManager.getDefaultSharedPreferences(context);
             if (sp.getBoolean("foodtruck_not_loaded", true)) {
                 createFoodData(context);
-                createArtData(context);
+                createArtData(context); 
             }
         }
         return instance;
@@ -162,8 +162,8 @@ public abstract class StreatDatabase extends RoomDatabase {
     }
 
     public abstract FoodTruckDAO getFoodDAO();
-    public abstract StreetArtDAO getArtDAO();
 
+    public abstract StreetArtDAO getArtDAO();
 }
 
 

@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.LocalBroadcastManager;
@@ -31,7 +30,6 @@ import java.util.List;
 
 import steel.marnix.eindwerkandroidstreats.R;
 import steel.marnix.eindwerkandroidstreats.fragments.AboutFragment;
-import steel.marnix.eindwerkandroidstreats.fragments.DetailFragment;
 import steel.marnix.eindwerkandroidstreats.fragments.RecyclerFragment;
 import steel.marnix.eindwerkandroidstreats.model.FoodTruck;
 import steel.marnix.eindwerkandroidstreats.model.StreatDatabase;
@@ -57,13 +55,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-
-        getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance()).addToBackStack("Back").commit();
-
+        Toast.makeText(getApplicationContext(), "Info window clicked",
+                Toast.LENGTH_SHORT).show();
     }
-
-    //setwindowcontentadapter
-    //aanpassing van de opmaak van elk kadertje
 
 
 
