@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,9 +37,10 @@ import steel.marnix.eindwerkandroidstreats.model.StreetArt;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
+
     //broadcastReceiver, will get updates from db
     private BroadcastReceiver mMessageBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -47,6 +49,21 @@ public class MainActivity extends AppCompatActivity
             drawArtMarkers();
         }
     };
+
+
+
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Toast.makeText(getApplicationContext(), "Info window clicked",
+                Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+
+
 
 
     @Override
@@ -148,6 +165,7 @@ public class MainActivity extends AppCompatActivity
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         mMap.setOnMarkerClickListener(this);
+        mMap.setOnInfoWindowClickListener(this);
         updatecamera();
         drawArtMarkers();
         drawFoodMarkers();
@@ -197,4 +215,8 @@ public class MainActivity extends AppCompatActivity
         super.onDestroy();
         LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(mMessageBroadcastReceiver);
     }
+
+
+
+
 }
