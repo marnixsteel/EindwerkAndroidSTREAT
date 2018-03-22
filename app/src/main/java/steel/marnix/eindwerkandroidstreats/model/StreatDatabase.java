@@ -36,9 +36,10 @@ public abstract class StreatDatabase extends RoomDatabase {
             instance = Room.databaseBuilder(context, StreatDatabase.class, "foodtruck.db").allowMainThreadQueries().build();
 
             sp = PreferenceManager.getDefaultSharedPreferences(context);
-            if (sp.getBoolean("foodtruck_not_loaded", true))
+            if (sp.getBoolean("foodtruck_not_loaded", true)) {
                 createFoodData(context);
                 createArtData(context);
+            }
         }
         return instance;
     }
