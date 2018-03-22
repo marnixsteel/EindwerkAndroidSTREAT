@@ -1,7 +1,12 @@
 package steel.marnix.eindwerkandroidstreats.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,18 +29,25 @@ import java.util.List;
 
 import steel.marnix.eindwerkandroidstreats.R;
 import steel.marnix.eindwerkandroidstreats.fragments.AboutFragment;
-import steel.marnix.eindwerkandroidstreats.fragments.DetailFragment;
 import steel.marnix.eindwerkandroidstreats.fragments.RecyclerFragment;
 import steel.marnix.eindwerkandroidstreats.model.FoodTruck;
-import steel.marnix.eindwerkandroidstreats.model.FoodTruckDatabase;
+import steel.marnix.eindwerkandroidstreats.model.StreatDatabase;
 import steel.marnix.eindwerkandroidstreats.model.StreetArt;
-import steel.marnix.eindwerkandroidstreats.model.StreetArtDatabase;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
+    //broadcastReceiver, will get updates from db
+    private BroadcastReceiver mMessageBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            drawFoodMarkers();
+            drawArtMarkers();
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +70,8 @@ public class MainActivity extends AppCompatActivity
         mf.getMapAsync(this);
 
         getFragmentManager().beginTransaction().replace(R.id.main_container, mf).commit();
+
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mMessageBroadcastReceiver, new IntentFilter("klaar"));
 
     }
 
@@ -140,7 +154,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void drawArtMarkers() {
-        List<StreetArt> streetArts = StreetArtDatabase.getInstance(this).getDAO().getAllStreetArt();
+        List<StreetArt> streetArts = StreatDatabase.getInstance(this).getArtDAO().getAllStreetArt();
 
         for (StreetArt art : streetArts) {
             mMap.addMarker(new MarkerOptions()
@@ -154,7 +168,7 @@ public class MainActivity extends AppCompatActivity
 
     private void drawFoodMarkers() {
 
-        List<FoodTruck> foodTrucks = FoodTruckDatabase.getInstance(this).getDAO().getAllFoodTrucks();
+        List<FoodTruck> foodTrucks = StreatDatabase.getInstance(this).getFoodDAO().getAllFoodTrucks();
 
         for (FoodTruck truck : foodTrucks) {
             mMap.addMarker(new MarkerOptions()
@@ -176,5 +190,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onMarkerClick(Marker marker) {
         return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(mMessageBroadcastReceiver);
     }
 }
