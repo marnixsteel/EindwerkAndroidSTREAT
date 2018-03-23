@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import android.view.View;
@@ -162,12 +163,13 @@ public class MainActivity extends AppCompatActivity
         List<StreetArt> streetArts = StreatDatabase.getInstance(this).getArtDAO().getAllStreetArt();
 
         for (StreetArt art : streetArts) {
-            mMap.addMarker(new MarkerOptions()
+            Marker m = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(art.getLatitude(), art.getLongitude()))
                     .title(art.getArtistName())
                     .snippet(art.getDescription())
                     .icon(BitmapDescriptorFactory.defaultMarker(200))
             );
+            m.setTag(art);
         }
     }
 
@@ -176,19 +178,31 @@ public class MainActivity extends AppCompatActivity
         List<FoodTruck> foodTrucks = StreatDatabase.getInstance(this).getFoodDAO().getAllFoodTrucks();
 
         for (FoodTruck truck : foodTrucks) {
-            mMap.addMarker(new MarkerOptions()
+            Marker m = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(truck.getLatitude(), truck.getLongitude()))
                     .title(truck.getName())
                     .snippet(truck.getLocation())
                     .icon(BitmapDescriptorFactory.defaultMarker(320))
             );
+            m.setTag(truck);
         }
     }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+
+        if(marker.getTag() instanceof FoodTruck) {
+            FoodTruck ft = (FoodTruck) marker.getTag();
+            Log.d("test", ft.getName());
+        }
+        if(marker.getTag() instanceof StreetArt) {
+            StreetArt st = (StreetArt) marker.getTag();
+            Log.d("test", st.getArtistName());
+        }
         return false;
     }
+
+
 
     @Override
     protected void onDestroy() {
