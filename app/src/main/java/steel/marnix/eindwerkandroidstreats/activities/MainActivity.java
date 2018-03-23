@@ -12,8 +12,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -38,9 +41,11 @@ import steel.marnix.eindwerkandroidstreats.model.StreetArt;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener, CompoundButton.OnCheckedChangeListener {
 
     private GoogleMap mMap;
+    Switch artSwitch;
+    Switch foodSwitch;
 
     //broadcastReceiver, will get updates from db
     private BroadcastReceiver mMessageBroadcastReceiver = new BroadcastReceiver() {
@@ -51,9 +56,6 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
-
-
-
     @Override
     public void onInfoWindowClick(Marker marker) {
 
@@ -61,37 +63,38 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView =  findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        MenuItem foodMenuItem = navigationView.getMenu().findItem(R.id.switch_food);
+        foodSwitch = foodMenuItem.getActionView().findViewById(R.id.item_switch);
+        foodSwitch.setChecked(true);
+        foodSwitch.setOnCheckedChangeListener(this);
+
+        MenuItem artMenuItem = navigationView.getMenu().findItem(R.id.switch_streetArt);
+        artSwitch = artMenuItem.getActionView().findViewById(R.id.item_switch);
+        artSwitch.setChecked(true);
+        artSwitch.setOnCheckedChangeListener(this);
 
         MapFragment mf = MapFragment.newInstance();
         mf.getMapAsync(this);
-
         getFragmentManager().beginTransaction().replace(R.id.main_container, mf).commit();
 
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mMessageBroadcastReceiver, new IntentFilter("klaar"));
-
     }
 
     @Override
@@ -105,39 +108,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.switch_streetArt) {
             //DetailFragment df = DetailFragment.newInstance();
             //getFragmentManager().beginTransaction().replace(R.id.main_container, df).addToBackStack("Back").commit();
         } else if (id == R.id.switch_food) {
             //DetailFragment df = DetailFragment.newInstance();
             //getFragmentManager().beginTransaction().replace(R.id.main_container, df).addToBackStack("Back").commit();
-
 
         } else if (id == R.id.nav_maps) {
             MapFragment mf = MapFragment.newInstance();
@@ -152,7 +131,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             AboutFragment af = AboutFragment.newInstance();
             getFragmentManager().beginTransaction().replace(R.id.main_container, af).addToBackStack("Back").commit();
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -171,6 +149,13 @@ public class MainActivity extends AppCompatActivity
         updatecamera();
         drawArtMarkers();
         drawFoodMarkers();
+    }
+
+    private void updatecamera() {
+        LatLng bxlCoord = new LatLng(50.8503369, 4.3517103);
+        CameraUpdate mCameraUpdate = CameraUpdateFactory.newLatLngZoom(bxlCoord, 13);
+
+        mMap.animateCamera(mCameraUpdate);
     }
 
     private void drawArtMarkers() {
@@ -200,13 +185,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void updatecamera() {
-        LatLng bxlCoord = new LatLng(50.8503369, 4.3517103);
-        CameraUpdate mCameraUpdate = CameraUpdateFactory.newLatLngZoom(bxlCoord, 13);
-
-        mMap.animateCamera(mCameraUpdate);
-    }
-
     @Override
     public boolean onMarkerClick(Marker marker) {
         return false;
@@ -218,7 +196,17 @@ public class MainActivity extends AppCompatActivity
         LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(mMessageBroadcastReceiver);
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
+        mMap.clear();
 
+        if (artSwitch.isChecked()) {
+            drawArtMarkers();
+        }
 
+        if (foodSwitch.isChecked()) {
+            drawFoodMarkers();
+        }
+    }
 }
