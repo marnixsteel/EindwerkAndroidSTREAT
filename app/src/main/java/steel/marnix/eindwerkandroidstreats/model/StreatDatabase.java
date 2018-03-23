@@ -160,9 +160,7 @@ public abstract class StreatDatabase extends RoomDatabase {
         });
         backGroundThread.start();
     }
-
     public abstract FoodTruckDAO getFoodDAO();
-
     public abstract StreetArtDAO getArtDAO();
 }
 
