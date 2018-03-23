@@ -30,6 +30,7 @@ import java.util.List;
 
 import steel.marnix.eindwerkandroidstreats.R;
 import steel.marnix.eindwerkandroidstreats.fragments.AboutFragment;
+import steel.marnix.eindwerkandroidstreats.fragments.DetailFragment;
 import steel.marnix.eindwerkandroidstreats.fragments.RecyclerFragment;
 import steel.marnix.eindwerkandroidstreats.model.FoodTruck;
 import steel.marnix.eindwerkandroidstreats.model.StreatDatabase;
@@ -55,8 +56,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Toast.makeText(getApplicationContext(), "Info window clicked",
-                Toast.LENGTH_SHORT).show();
+
+        getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance()).addToBackStack("Back").commit();
+
     }
 
 
