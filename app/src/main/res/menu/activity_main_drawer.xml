@@ -9,10 +9,14 @@
     <menu>
         <item
             android:id="@+id/switch_food"
+            android:checkable="true"
+            android:checked="false"
             android:title="Food"
             app:actionLayout="@layout/switch_item" />
         <item
             android:id="@+id/switch_streetArt"
+            android:checkable="true"
+            android:checked="false"
             android:title="Street Art"
             app:actionLayout="@layout/switch_item" />
     </menu>
