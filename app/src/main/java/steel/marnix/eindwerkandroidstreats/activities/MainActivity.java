@@ -17,7 +17,6 @@ import android.view.MenuItem;
 
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,7 +28,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.HashMap;
 import java.util.List;
 
 import steel.marnix.eindwerkandroidstreats.R;
@@ -57,17 +55,6 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
-    @Override
-    public void onInfoWindowClick(Marker marker) {
-
-        if (marker.getTag() instanceof StreetArt) {
-            StreetArt selectedObject = (StreetArt) marker.getTag();
-            getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance(selectedObject)).addToBackStack("Back").commit();
-        }else{
-            FoodTruck selectedObject = (FoodTruck) marker.getTag();
-            getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance(selectedObject)).addToBackStack("Back").commit();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +192,18 @@ public class MainActivity extends AppCompatActivity
             Log.d("test", st.getArtistName());
         }
         return false;
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+
+        if (marker.getTag() instanceof StreetArt) {
+            StreetArt selectedObject = (StreetArt) marker.getTag();
+            getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance(selectedObject)).addToBackStack("Back").commit();
+        }else{
+            FoodTruck selectedObject = (FoodTruck) marker.getTag();
+            getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance(selectedObject)).addToBackStack("Back").commit();
+        }
     }
 
     @Override
