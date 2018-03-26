@@ -53,14 +53,11 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-
-
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
         tvTitle = rootView.findViewById(R.id.tv_title_detail);
         tvDescription = rootView.findViewById(R.id.tv_description_detail);
         ivPhoto = rootView.findViewById(R.id.iv_detail_image);
-
 
         if(getArguments().getSerializable("object") instanceof StreetArt) {
             StreetArt streetArt = (StreetArt) getArguments().getSerializable("object");

@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity
     Switch artSwitch;
     Switch foodSwitch;
 
-
     //broadcastReceiver, will get updates from db
     private BroadcastReceiver mMessageBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -207,8 +206,6 @@ public class MainActivity extends AppCompatActivity
         }
         return false;
     }
-
-
 
     @Override
     protected void onDestroy() {
