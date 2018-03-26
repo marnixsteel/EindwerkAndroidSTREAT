@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.HashMap;
 import java.util.List;
 
 import steel.marnix.eindwerkandroidstreats.R;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity
     Switch artSwitch;
     Switch foodSwitch;
 
+
     //broadcastReceiver, will get updates from db
     private BroadcastReceiver mMessageBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -59,8 +61,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onInfoWindowClick(Marker marker) {
 
-        getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance()).addToBackStack("Back").commit();
-
+        if (marker.getTag() instanceof StreetArt) {
+            StreetArt selectedObject = (StreetArt) marker.getTag();
+            getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance(selectedObject)).addToBackStack("Back").commit();
+        }else{
+            FoodTruck selectedObject = (FoodTruck) marker.getTag();
+            getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance(selectedObject)).addToBackStack("Back").commit();
+        }
     }
 
     @Override

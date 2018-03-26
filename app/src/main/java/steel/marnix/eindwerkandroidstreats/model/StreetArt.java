@@ -5,12 +5,14 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 /**
  * Created by mazze on 19/03/2018.
  */
 
 @Entity
-public class StreetArt {
+public class StreetArt implements Serializable {
 
     @PrimaryKey @NonNull
     private String id;
