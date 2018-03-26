@@ -16,17 +16,18 @@ public class StreetArt implements Serializable {
 
     @PrimaryKey @NonNull
     private String id;
-    private String artistName, description, category;
+    private String artistName, description, imageUrl, category;
     private double latitude, longitude;
 
     public StreetArt(){
     }
 
     @Ignore
-    public StreetArt(@NonNull String id, String artistName, String description, String category, double latitude, double longitude) {
+    public StreetArt(@NonNull String id, String artistName, String description, String imageID, String category, double latitude, double longitude) {
         this.id = id;
         this.artistName = artistName;
         this.description = description;
+        this.imageUrl = "https://opendata.brussel.be/explore/dataset/streetart/files/" + imageID +"/300/";
         this.category = category;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -55,6 +56,14 @@ public class StreetArt implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getCategory() {

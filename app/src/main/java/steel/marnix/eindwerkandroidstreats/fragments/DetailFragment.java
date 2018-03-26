@@ -2,12 +2,15 @@ package steel.marnix.eindwerkandroidstreats.fragments;
 
 
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -64,6 +67,13 @@ public class DetailFragment extends Fragment {
             StreetArt streetArt = (StreetArt) getArguments().getSerializable("object");
             tvTitle.setText(streetArt.getArtistName());
             tvDescription.setText(streetArt.getDescription());
+
+            Uri uri = Uri.parse(streetArt.getImageUrl());
+
+
+            Picasso.get()
+                    .load(uri)
+                    .into(ivPhoto);
         } else {
             FoodTruck foodTruck = (FoodTruck) getArguments().getSerializable("object");
             tvTitle.setText(foodTruck.getName());

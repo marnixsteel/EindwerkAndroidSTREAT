@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -136,16 +137,21 @@ public abstract class StreatDatabase extends RoomDatabase {
                         String naam = fields.getString("name_of_the_artist");
                         String verduidelijking = (fields.has("verduidelijking")) ? fields.getString("verduidelijking") : "";
 
-                        StreetArt streetArt = new StreetArt(
-                                jsonObject.getString("recordid"),
-                                naam,
-                                verduidelijking,
-                                "street art",
-                                coordinates.getDouble(0),
-                                coordinates.getDouble(1)
-                        );
+                        String imageID = (fields.has("photo"))?fields.getJSONObject("photo").getString("id"):"";
 
-                        instance.getArtDAO().insert(streetArt);
+                        if(!TextUtils.isEmpty(imageID)) {
+                            StreetArt streetArt = new StreetArt(
+                                    jsonObject.getString("recordid"),
+                                    naam,
+                                    verduidelijking,
+                                    imageID,
+                                    "street art",
+                                    coordinates.getDouble(0),
+                                    coordinates.getDouble(1)
+                            );
+
+                            instance.getArtDAO().insert(streetArt);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
