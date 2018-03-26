@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.Random;
 
 import steel.marnix.eindwerkandroidstreats.R;
 import steel.marnix.eindwerkandroidstreats.model.FoodTruck;
@@ -28,7 +29,7 @@ public class DetailFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static DetailFragment newInstance(StreetArt selectedObject){
+    public static DetailFragment newInstance(StreetArt selectedObject) {
         DetailFragment fragment = new DetailFragment();
 
         Bundle data = new Bundle();
@@ -59,17 +60,28 @@ public class DetailFragment extends Fragment {
         tvDescription = rootView.findViewById(R.id.tv_description_detail);
         ivPhoto = rootView.findViewById(R.id.iv_detail_image);
 
-        if(getArguments().getSerializable("object") instanceof StreetArt) {
+        if (getArguments().getSerializable("object") instanceof StreetArt) {
             StreetArt streetArt = (StreetArt) getArguments().getSerializable("object");
             tvTitle.setText(streetArt.getArtistName());
             tvDescription.setText(streetArt.getDescription());
-        }
-        else {
+        } else {
             FoodTruck foodTruck = (FoodTruck) getArguments().getSerializable("object");
             tvTitle.setText(foodTruck.getName());
             tvDescription.setText(foodTruck.getLocation());
-        }
 
+            Random r = new Random();
+            switch (r.nextInt(3)) {
+                case 0:
+                    ivPhoto.setImageResource(R.drawable.foodtrucklogo1);
+                    break;
+                case 1:
+                    ivPhoto.setImageResource(R.drawable.foodtrucklogo2);
+                    break;
+                case 2:
+                    ivPhoto.setImageResource(R.drawable.foodtrucklogo3);
+                    break;
+            }
+        }
         return rootView;
     }
 }
