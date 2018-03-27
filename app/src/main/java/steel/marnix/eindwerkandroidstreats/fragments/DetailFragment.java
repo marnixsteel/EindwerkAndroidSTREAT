@@ -70,7 +70,6 @@ public class DetailFragment extends Fragment {
 
             Uri uri = Uri.parse(streetArt.getImageUrl());
 
-
             Picasso.get()
                     .load(uri)
                     .into(ivPhoto);
@@ -78,7 +77,6 @@ public class DetailFragment extends Fragment {
             FoodTruck foodTruck = (FoodTruck) getArguments().getSerializable("object");
             tvTitle.setText(foodTruck.getName());
             tvDescription.setText(foodTruck.getLocation());
-
 
         }
         return rootView;

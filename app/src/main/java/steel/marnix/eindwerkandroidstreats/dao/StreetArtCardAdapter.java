@@ -60,8 +60,6 @@ public class StreetArtCardAdapter extends RecyclerView.Adapter<StreetArtCardAdap
                 .load(sa.getImageUrl())
                 .resize(200, 200)
                 .into(holder.ivArt);
-
-
     }
 
 
