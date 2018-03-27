@@ -33,6 +33,9 @@ public class StreetArt implements Serializable {
         this.longitude = longitude;
     }
 
+    public StreetArt(String recordid, String naam, String verduidelijking, String s, double aDouble, double aDouble1) {
+    }
+
     @NonNull
     public String getId() {
         return id;

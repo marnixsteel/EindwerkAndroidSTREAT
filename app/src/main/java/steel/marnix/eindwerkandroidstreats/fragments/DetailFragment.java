@@ -61,7 +61,7 @@ public class DetailFragment extends Fragment {
 
         tvTitle = rootView.findViewById(R.id.tv_title_detail);
         tvDescription = rootView.findViewById(R.id.tv_description_detail);
-        ivPhoto = rootView.findViewById(R.id.iv_detail_image);
+        ivPhoto = rootView.findViewById(R.id.iv_detail_pic);
 
         if (getArguments().getSerializable("object") instanceof StreetArt) {
             StreetArt streetArt = (StreetArt) getArguments().getSerializable("object");
@@ -79,18 +79,7 @@ public class DetailFragment extends Fragment {
             tvTitle.setText(foodTruck.getName());
             tvDescription.setText(foodTruck.getLocation());
 
-            Random r = new Random();
-            switch (r.nextInt(3)) {
-                case 0:
-                    ivPhoto.setImageResource(R.drawable.foodtrucklogo1);
-                    break;
-                case 1:
-                    ivPhoto.setImageResource(R.drawable.foodtrucklogo2);
-                    break;
-                case 2:
-                    ivPhoto.setImageResource(R.drawable.foodtrucklogo3);
-                    break;
-            }
+
         }
         return rootView;
     }

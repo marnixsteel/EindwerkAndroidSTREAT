@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.model.Marker;
+
 import steel.marnix.eindwerkandroidstreats.R;
+import steel.marnix.eindwerkandroidstreats.activities.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +32,6 @@ public class AboutFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_about, container, false);
-
 
     }
 

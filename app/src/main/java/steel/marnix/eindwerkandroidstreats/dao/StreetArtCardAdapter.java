@@ -9,35 +9,40 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import steel.marnix.eindwerkandroidstreats.R;
+import steel.marnix.eindwerkandroidstreats.model.StreetArt;
 
 /**
  * Created by michaelhollants on 19/03/2018.
  */
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
-    private String[] mDataset;
+public class StreetArtCardAdapter extends RecyclerView.Adapter<StreetArtCardAdapter.ViewHolder> {
+    private List<StreetArt> streetArtDataset;
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
             public TextView tvArtistName;
             public ImageView ivArt;
+            public TextView tvArtDescription;
 
             public ViewHolder(View v) {
                 super(v);
-                tvArtistName = v.findViewById(R.id.tv_cv_artist_name);
+                tvArtistName = v.findViewById(R.id.tv_listcontent_name);
                 ivArt = v.findViewById(R.id.iv_listcontent_foto);
+                tvArtDescription = v.findViewById(R.id.tv_listcontent_description);
             }
         }
 
 
-    public CardAdapter(String[] myDataset) {
-        mDataset = myDataset;
-    }
+    public StreetArtCardAdapter(List<StreetArt> streetArtDataset) {
+        this.streetArtDataset = streetArtDataset;
+        }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public CardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StreetArtCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View rView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_content, parent, false);
@@ -47,18 +52,23 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.tvArtistName.setText(mDataset[position]);
+
+        StreetArt sa = streetArtDataset.get(position);
+
+        holder.tvArtistName.setText(sa.getArtistName());
         Picasso.get()
-                .load(R.mipmap.streat_icons_round)
+                .load(sa.getImageUrl())
                 .resize(200, 200)
                 .into(holder.ivArt);
+
+
     }
 
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return streetArtDataset.size();
     }
 }
 
