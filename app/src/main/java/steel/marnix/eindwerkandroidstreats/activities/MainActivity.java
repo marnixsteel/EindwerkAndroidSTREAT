@@ -32,8 +32,9 @@ import java.util.List;
 
 import steel.marnix.eindwerkandroidstreats.R;
 import steel.marnix.eindwerkandroidstreats.fragments.AboutFragment;
+import steel.marnix.eindwerkandroidstreats.fragments.ArtRecyclerFragment;
 import steel.marnix.eindwerkandroidstreats.fragments.DetailFragment;
-import steel.marnix.eindwerkandroidstreats.fragments.RecyclerFragment;
+import steel.marnix.eindwerkandroidstreats.fragments.FoodRecyclerFragment;
 import steel.marnix.eindwerkandroidstreats.model.FoodTruck;
 import steel.marnix.eindwerkandroidstreats.model.StreatDatabase;
 import steel.marnix.eindwerkandroidstreats.model.StreetArt;
@@ -118,12 +119,12 @@ public class MainActivity extends AppCompatActivity
             getFragmentManager().beginTransaction().replace(R.id.main_container, mf).addToBackStack("Back").commit();
 
         } else if (id == R.id.nav_list_food) {
-            RecyclerFragment rf = RecyclerFragment.newInstance();
-            getFragmentManager().beginTransaction().replace(R.id.main_container, rf).addToBackStack("Back").commit();
+            FoodRecyclerFragment frf = FoodRecyclerFragment.newInstance();
+            getFragmentManager().beginTransaction().replace(R.id.main_container, frf).addToBackStack("Back").commit();
 
         } else if (id == R.id.nav_list_streatart) {
-            RecyclerFragment rf = RecyclerFragment.newInstance();
-            getFragmentManager().beginTransaction().replace(R.id.main_container, rf).addToBackStack("Back").commit();
+            ArtRecyclerFragment arf = ArtRecyclerFragment.newInstance();
+            getFragmentManager().beginTransaction().replace(R.id.main_container, arf).addToBackStack("Back").commit();
 
         } else if (id == R.id.nav_about) {
             AboutFragment af = AboutFragment.newInstance();
