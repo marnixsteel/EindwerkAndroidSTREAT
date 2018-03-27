@@ -31,9 +31,13 @@
             android:icon="@drawable/ic_maps"
             android:title="Maps" />
         <item
-            android:id="@+id/nav_list"
+            android:id="@+id/nav_list_food"
             android:icon="@drawable/ic_list"
-            android:title="List" />
+            android:title="Food List" />
+        <item
+            android:id="@+id/nav_list_streatart"
+            android:icon="@drawable/ic_list"
+            android:title="StreatArt List" />
 
     </menu>
     </item>

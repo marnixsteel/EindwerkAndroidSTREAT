@@ -33,7 +33,7 @@ import java.util.List;
 import steel.marnix.eindwerkandroidstreats.R;
 import steel.marnix.eindwerkandroidstreats.fragments.AboutFragment;
 import steel.marnix.eindwerkandroidstreats.fragments.DetailFragment;
-import steel.marnix.eindwerkandroidstreats.fragments.ArtRecyclerFragment;
+import steel.marnix.eindwerkandroidstreats.fragments.RecyclerFragment;
 import steel.marnix.eindwerkandroidstreats.model.FoodTruck;
 import steel.marnix.eindwerkandroidstreats.model.StreatDatabase;
 import steel.marnix.eindwerkandroidstreats.model.StreetArt;
@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener, CompoundButton.OnCheckedChangeListener {
 
     private GoogleMap mMap;
-    private ArtRecyclerFragment rf;
-    private MapFragment mf;
     Switch artSwitch;
     Switch foodSwitch;
 
@@ -56,7 +54,6 @@ public class MainActivity extends AppCompatActivity
             drawArtMarkers();
         }
     };
-
 
 
     @Override
@@ -115,13 +112,17 @@ public class MainActivity extends AppCompatActivity
             //getFragmentManager().beginTransaction().replace(R.id.main_container, df).addToBackStack("Back").commit();
 
         } else if (id == R.id.nav_maps) {
-            mf = MapFragment.newInstance();
+            MapFragment mf = MapFragment.newInstance();
             mf.getMapAsync(this);
 
             getFragmentManager().beginTransaction().replace(R.id.main_container, mf).addToBackStack("Back").commit();
 
-        } else if (id == R.id.nav_list) {
-            rf = ArtRecyclerFragment.newInstance();
+        } else if (id == R.id.nav_list_food) {
+            RecyclerFragment rf = RecyclerFragment.newInstance();
+            getFragmentManager().beginTransaction().replace(R.id.main_container, rf).addToBackStack("Back").commit();
+
+        } else if (id == R.id.nav_list_streatart) {
+            RecyclerFragment rf = RecyclerFragment.newInstance();
             getFragmentManager().beginTransaction().replace(R.id.main_container, rf).addToBackStack("Back").commit();
 
         } else if (id == R.id.nav_about) {
