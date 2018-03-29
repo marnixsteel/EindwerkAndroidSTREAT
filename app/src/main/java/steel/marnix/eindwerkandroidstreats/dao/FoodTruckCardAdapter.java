@@ -1,5 +1,9 @@
 package steel.marnix.eindwerkandroidstreats.dao;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Random;
 
 import steel.marnix.eindwerkandroidstreats.R;
+import steel.marnix.eindwerkandroidstreats.fragments.DetailFragment;
 import steel.marnix.eindwerkandroidstreats.model.FoodTruck;
 
 /**
@@ -19,11 +25,11 @@ import steel.marnix.eindwerkandroidstreats.model.FoodTruck;
  */
 
 public class FoodTruckCardAdapter extends RecyclerView.Adapter<FoodTruckCardAdapter.ViewHolder> {
+
     private List<FoodTruck> foodTruckDataSet;
+    private Context context;
 
-
-
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder{
         // each data item is just a string in this case
         public TextView tvName;
         public ImageView ivPhoto;
@@ -36,16 +42,8 @@ public class FoodTruckCardAdapter extends RecyclerView.Adapter<FoodTruckCardAdap
             ivPhoto = v.findViewById(R.id.iv_listcontent_foto);
             tvLocation = v.findViewById(R.id.tv_listcontent_description);
             card = v.findViewById(R.id.cv_content);
-            card.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-
-
         }
     }
-
 
     public FoodTruckCardAdapter(List<FoodTruck> foodTruckDataSet) {
         this.foodTruckDataSet = foodTruckDataSet;
@@ -55,7 +53,8 @@ public class FoodTruckCardAdapter extends RecyclerView.Adapter<FoodTruckCardAdap
     @Override
     public FoodTruckCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
-        View rView = LayoutInflater.from(parent.getContext())
+        context = parent.getContext();
+        View rView = LayoutInflater.from(context)
                 .inflate(R.layout.list_content, parent, false);
         return new ViewHolder(rView);
 
@@ -64,7 +63,7 @@ public class FoodTruckCardAdapter extends RecyclerView.Adapter<FoodTruckCardAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        FoodTruck ft = foodTruckDataSet.get(position);
+        final FoodTruck ft = foodTruckDataSet.get(position);
 
         holder.tvName.setText(ft.getName());
         holder.tvLocation.setText(ft.getLocation());
@@ -81,6 +80,14 @@ public class FoodTruckCardAdapter extends RecyclerView.Adapter<FoodTruckCardAdap
                 holder.ivPhoto.setImageResource(R.drawable.foodtrucklogo3);
                 break;
         }
+
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, ft.getName(), Toast.LENGTH_SHORT).show();
+                ((Activity)context).getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance(ft)).addToBackStack("back").commit();
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
