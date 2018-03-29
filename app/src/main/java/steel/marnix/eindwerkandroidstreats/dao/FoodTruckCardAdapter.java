@@ -35,7 +35,7 @@ public class FoodTruckCardAdapter extends RecyclerView.Adapter<FoodTruckCardAdap
             tvName = v.findViewById(R.id.tv_listcontent_name);
             ivPhoto = v.findViewById(R.id.iv_listcontent_foto);
             tvLocation = v.findViewById(R.id.tv_listcontent_description);
-            card = v.findViewById(R.id.cv_cardlayout);
+            card = v.findViewById(R.id.cv_content);
             card.setOnClickListener(this);
         }
 

@@ -77,8 +77,22 @@ public class DetailFragment extends Fragment {
             FoodTruck foodTruck = (FoodTruck) getArguments().getSerializable("object");
             tvTitle.setText(foodTruck.getName());
             tvDescription.setText(foodTruck.getLocation());
+            Random r = new Random();
+            switch (r.nextInt(3)) {
+                case 0:
+                    ivPhoto.setImageResource(R.drawable.foodtrucklogo1);
+                    break;
+                case 1:
+                    ivPhoto.setImageResource(R.drawable.foodtrucklogo2);
+                    break;
+                case 2:
+                    ivPhoto.setImageResource(R.drawable.foodtrucklogo3);
+                    break;
 
+                }
+            }
+            return rootView;
         }
-        return rootView;
     }
-}
+
+

@@ -34,7 +34,7 @@ public class StreetArtCardAdapter extends RecyclerView.Adapter<StreetArtCardAdap
                 tvArtistName = v.findViewById(R.id.tv_listcontent_name);
                 ivArt = v.findViewById(R.id.iv_listcontent_foto);
                 tvArtDescription = v.findViewById(R.id.tv_listcontent_description);
-                card = v.findViewById(R.id.cv_cardlayout);
+                card = v.findViewById(R.id.cv_content);
                 card.setOnClickListener(this);
             }
 
