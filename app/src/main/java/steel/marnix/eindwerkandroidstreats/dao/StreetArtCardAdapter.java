@@ -1,5 +1,6 @@
 package steel.marnix.eindwerkandroidstreats.dao;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,17 +22,26 @@ import steel.marnix.eindwerkandroidstreats.model.StreetArt;
 public class StreetArtCardAdapter extends RecyclerView.Adapter<StreetArtCardAdapter.ViewHolder> {
     private List<StreetArt> streetArtDataset;
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             // each data item is just a string in this case
             public TextView tvArtistName;
             public ImageView ivArt;
             public TextView tvArtDescription;
+            CardView card;
 
             public ViewHolder(View v) {
                 super(v);
                 tvArtistName = v.findViewById(R.id.tv_listcontent_name);
                 ivArt = v.findViewById(R.id.iv_listcontent_foto);
                 tvArtDescription = v.findViewById(R.id.tv_listcontent_description);
+                card = v.findViewById(R.id.cv_cardlayout);
+                card.setOnClickListener(this);
+            }
+
+            @Override
+            public void onClick(View view) {
+
+
             }
         }
 

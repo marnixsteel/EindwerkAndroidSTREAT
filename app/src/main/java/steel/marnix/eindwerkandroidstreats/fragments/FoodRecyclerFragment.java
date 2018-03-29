@@ -45,7 +45,7 @@ public class FoodRecyclerFragment extends android.app.Fragment {
 
         FoodTruckCardAdapter cardAdapter = new FoodTruckCardAdapter(StreatDatabase.getInstance(getActivity()).getFoodDAO().getAllFoodTrucks());
 
-        foodListRv.setAdapter(cardAdapter);;
+        foodListRv.setAdapter(cardAdapter);
 
         return rootView;
     }
