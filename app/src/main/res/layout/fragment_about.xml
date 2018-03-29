@@ -43,6 +43,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:background="@color/text_highlight"
+        android:elevation="4dp"
         android:fontFamily="sans-serif"
         android:text="@string/marnix"
         android:textColor="@android:color/white"
@@ -59,6 +60,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:background="@color/text_highlight"
+        android:elevation="4dp"
         android:fontFamily="sans-serif"
         android:text="@string/jo"
         android:textColor="@android:color/white"
@@ -76,13 +78,13 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="20dp"
         android:background="@color/text_highlight"
+        android:elevation="4dp"
         android:fontFamily="sans-serif"
         android:text="@string/michael"
         android:textColor="@android:color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_about_top"
-        android:layout_marginRight="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_about_top" />
 
     <TextView
         android:id="@+id/tv_about_ehb"
