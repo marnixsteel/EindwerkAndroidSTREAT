@@ -3,9 +3,12 @@ package steel.marnix.eindwerkandroidstreats.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.model.Marker;
 
@@ -25,7 +28,6 @@ public class AboutFragment extends Fragment {
     public static AboutFragment newInstance() {
         return new AboutFragment();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

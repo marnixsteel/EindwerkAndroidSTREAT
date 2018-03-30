@@ -103,6 +103,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/text_highlight"
+        android:clickable="true"
         android:text="@string/license"
         android:textColor="@android:color/white"
         android:textSize="12sp"
@@ -110,7 +111,8 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_about_copyright"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:autoLink="web"/>
 
     <TextView
         android:id="@+id/tv_about_copyright"
