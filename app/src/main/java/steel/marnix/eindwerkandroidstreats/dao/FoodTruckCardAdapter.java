@@ -1,16 +1,12 @@
 package steel.marnix.eindwerkandroidstreats.dao;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,7 +82,6 @@ public class FoodTruckCardAdapter extends RecyclerView.Adapter<FoodTruckCardAdap
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, ft.getName(), Toast.LENGTH_SHORT).show();
                 ((Activity)context).getFragmentManager().beginTransaction().replace(R.id.main_container, DetailFragment.newInstance(ft)).addToBackStack("back").commit();
             }
         });

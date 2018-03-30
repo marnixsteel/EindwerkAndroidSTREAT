@@ -66,7 +66,7 @@ public class DetailFragment extends Fragment {
         if (getArguments().getSerializable("object") instanceof StreetArt) {
             StreetArt streetArt = (StreetArt) getArguments().getSerializable("object");
             tvTitle.setText(streetArt.getArtistName());
-            tvDescription.setText(streetArt.getDescription());
+            tvDescription.setText(streetArt.getDescription() + "  Quisque molestie posuere arcu non interdum. Quisque at sem vitae ante consectetur venenatis. Duis tincidunt orci ligula, convallis pellentesque sem sollicitudin sed. Fusce sit amet quam vitae lorem imperdiet dapibus. Integer venenatis vestibulum lacus, at molestie tortor tincidunt sit amet. Donec feugiat, nisl id tincidunt posuere, velit justo efficitur est, non hendrerit ante mauris eget erat. Suspendisse id ullamcorper diam, non convallis dolor. Quisque nibh libero, ultricies at lacinia sit amet, viverra id sem. Suspendisse eget ornare sem. Vivamus in congue augue, eu efficitur magna. Nullam fermentum quis nisi et gravida." );
 
             Uri uri = Uri.parse(streetArt.getImageUrl());
 
@@ -76,7 +76,7 @@ public class DetailFragment extends Fragment {
         } else {
             FoodTruck foodTruck = (FoodTruck) getArguments().getSerializable("object");
             tvTitle.setText(foodTruck.getName());
-            tvDescription.setText(foodTruck.getLocation());
+            tvDescription.setText(foodTruck.getLocation() + "  Quisque molestie posuere arcu non interdum. Quisque at sem vitae ante consectetur venenatis. Duis tincidunt orci ligula, convallis pellentesque sem sollicitudin sed. Fusce sit amet quam vitae lorem imperdiet dapibus. Integer venenatis vestibulum lacus, at molestie tortor tincidunt sit amet. Donec feugiat, nisl id tincidunt posuere, velit justo efficitur est, non hendrerit ante mauris eget erat. Suspendisse id ullamcorper diam, non convallis dolor. Quisque nibh libero, ultricies at lacinia sit amet, viverra id sem. Suspendisse eget ornare sem. Vivamus in congue augue, eu efficitur magna. Nullam fermentum quis nisi et gravida.");
             Random r = new Random();
             switch (r.nextInt(3)) {
                 case 0:
